@@ -16,6 +16,6 @@ jobs:
           head-branch-regex: 'EL-\d+'
           title-template: "[%headbranch%]"
           body-template: |
-            Merging into '%basebranch%'
+            Merging PR into '%basebranch%'
             [Link to ticket: %headbranch%](https://data4altayyargroup.atlassian.net/browse/%headbranch%)
           body-update-action: "suffix"
