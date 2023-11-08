@@ -1,0 +1,19 @@
+name: Hotfix Action
+on:
+  pull_request:
+    branches:
+      - develop
+jobs:
+  Create-Pull-Request-Action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: quangvo09/pull-request-action@v1
+        name: Create PR to develop
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch_prefix: EL
+          base_branch: develop
+          labels: develop
+          assignees: shwetatyagi22
+          reviewers: shwetatyagi22
