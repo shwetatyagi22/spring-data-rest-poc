@@ -12,8 +12,8 @@ jobs:
       - uses: the-wright-jamie/update-pr-info-action@v1
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          base-branch: develop
-          head-branch-prefix: 'EL-'
+          base-branch-regex: '[a-z\d-_.\\/]+'
+          head-branch-regex: 'EL-\d+'
           title-template: "[%headbranch%]"
           body-template: |
             Merging PR into '%basebranch%'
