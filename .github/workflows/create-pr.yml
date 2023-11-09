@@ -25,5 +25,5 @@ jobs:
           title-template: "[%headbranch%]"
           body-template: |
             merging PR into '%basebranch%'
-            [Link to ticket: %headbranch%](https://data4altayyargroup.atlassian.net/browse/%headbranch%)
+            [Link to ticket: %headbranch%](https://test.com/browse/%headbranch%)
           body-update-action: "suffix"
