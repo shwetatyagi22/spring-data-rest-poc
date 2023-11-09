@@ -2,7 +2,7 @@ name: "Create PR"
 on: push
 
 jobs:
-  - create-pr-on-push:
+  create-pr-on-push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@1.0.0
@@ -14,16 +14,16 @@ jobs:
           head: ${{ github.ref }}
           base: develop
           title: ${{ github.event.workflow_run.head_commit.message }}
-  - update_pr:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: the-wright-jamie/update-pr-info-action@v1
-          with:
-            repo-token: "${{ secrets.GITHUB_TOKEN }}"
-            base-branch-regex: '[a-z\d-_.\\/]+'
-            head-branch-regex: 'el-\d+'
-            title-template: "[%headbranch%]"
-            body-template: |
-              PR for ${{ github.event.workflow_run.head_commit.message }} merging into '%basebranch%'
-              [Link to ticket: %headbranch%](https://data4altayyargroup.atlassian.net/browse/%headbranch%)
-            body-update-action: "suffix"
+  update_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: the-wright-jamie/update-pr-info-action@v1
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          base-branch-regex: '[a-z\d-_.\\/]+'
+          head-branch-regex: 'el-\d+'
+          title-template: "[%headbranch%]"
+          body-template: |
+            PR for ${{ github.event.workflow_run.head_commit.message }} merging into '%basebranch%'
+            [Link to ticket: %headbranch%](https://data4altayyargroup.atlassian.net/browse/%headbranch%)
+          body-update-action: "suffix"
