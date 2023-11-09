@@ -1,19 +1,16 @@
-name: Hotfix Action
-on:
-  pull_request:
-    branches:
-      - develop
+name: "Create PR"
+on: push
+
 jobs:
-  Create-Pull-Request-Action:
+  create-pr-on-push:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: quangvo09/pull-request-action@v1
-        name: Create PR to develop
+      - uses: actions/checkout@1.0.0
+      
+      - name: Create pull request
+        uses: thomaseizinger/create-pull-request@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch_prefix: EL
-          base_branch: develop
-          labels: develop
-          assignees: shwetatyagi22
-          reviewers: shwetatyagi22
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          head: ${{ github.ref }}
+          base: master
+          title: "An automatically created PR!"
