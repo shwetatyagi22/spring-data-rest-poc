@@ -14,16 +14,3 @@ jobs:
           head: ${{ github.ref }}
           base: develop
           title: ${{ github.event.head_commit.message }}
-  update_pr:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: the-wright-jamie/update-pr-info-action@v1
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          base-branch-regex: '[a-z\d-_.\\/]+'
-          head-branch-regex: 'el-\d+'
-          title-template: "[%headbranch%]"
-          body-template: |
-            merging PR into '%basebranch%'
-            [Link to ticket: %headbranch%](https://data4altayyargroup.atlassian.net/browse/%headbranch%)
-          body-update-action: "suffix"
