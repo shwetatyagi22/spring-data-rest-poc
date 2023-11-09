@@ -1,19 +1,29 @@
-name: Hotfix Action
-on:
-  pull_request:
-    branches:
-      - develop
+name: "Create PR"
+on: push
+
 jobs:
-  Create-Pull-Request-Action:
+  - create-pr-on-push:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: quangvo09/pull-request-action@v1
-        name: Create PR to develop
+      - uses: actions/checkout@1.0.0
+      
+      - name: Create pull request
+        uses: thomaseizinger/create-pull-request@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch_prefix: EL
-          base_branch: develop
-          labels: develop
-          assignees: shwetatyagi22
-          reviewers: shwetatyagi22
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          head: ${{ github.ref }}
+          base: develop
+          title: ${{ github.event.workflow_run.head_commit.message }}
+  - update_pr:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: the-wright-jamie/update-pr-info-action@v1
+          with:
+            repo-token: "${{ secrets.GITHUB_TOKEN }}"
+            base-branch-regex: '[a-z\d-_.\\/]+'
+            head-branch-regex: 'el-\d+'
+            title-template: "[%headbranch%]"
+            body-template: |
+              Merging PR into '%basebranch%'
+              [Link to ticket: %headbranch%](https://data4altayyargroup.atlassian.net/browse/%headbranch%)
+            body-update-action: "suffix"
