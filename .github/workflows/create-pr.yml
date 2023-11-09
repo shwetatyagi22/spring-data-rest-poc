@@ -2,7 +2,7 @@ name: "Create PR"
 on: push
 
 jobs:
-  create-pr-on-push:
+  - create-pr-on-push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@1.0.0
@@ -13,4 +13,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           head: ${{ github.ref }}
           base: develop
-          title: "An automatically created PR!"
+          title: "[%headbranch%]"
+  - update_pr:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: the-wright-jamie/update-pr-info-action@v1
+          with:
+            repo-token: "${{ secrets.GITHUB_TOKEN }}"
+            base-branch-regex: '[a-z\d-_.\\/]+'
+            head-branch-regex: 'el-\d+'
+            title-template: "[%headbranch%]"
+            body-template: |
+              Merging PR into '%basebranch%'
+              [Link to ticket: %headbranch%](https://data4altayyargroup.atlassian.net/browse/%headbranch%)
+            body-update-action: "suffix"

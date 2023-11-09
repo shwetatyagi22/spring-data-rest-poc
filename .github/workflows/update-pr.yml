@@ -1,4 +1,4 @@
-name: "Update Pull Request"
+name: "Update Pull Request from push"
 on: pull_request
 
 permissions:
