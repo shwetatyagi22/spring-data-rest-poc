@@ -24,6 +24,6 @@ jobs:
             head-branch-regex: 'el-\d+'
             title-template: "[%headbranch%]"
             body-template: |
-              Merging PR into '%basebranch%'
+              PR for ${{ github.event.workflow_run.head_commit.message }} merging into '%basebranch%'
               [Link to ticket: %headbranch%](https://data4altayyargroup.atlassian.net/browse/%headbranch%)
             body-update-action: "suffix"
